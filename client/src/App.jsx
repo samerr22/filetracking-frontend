@@ -22,12 +22,22 @@ export default function App() {
 
        
 
-        <Route path="/updatee/:iddd" element={<Aupdate />} />
-        <Route path="/mya" element={<Record />} />
-        <Route path="/add" element={<Ap/>} />
+       <Route path="/" element={<Homescreen />} />
+        <Route path="/compnayregister" element={<SignUp />} />
+        <Route path="/LearderRe" element={<LearderRe />} />
+        <Route path="/Leardersign-in" element={<Signin />} />
+        <Route path="/employeesi" element={<SignInEmployee />} />
+        <Route path="/sale" element={<Sale />} />
 
-
-        <Route path="/" element={<Homep/>} />
+        {/* Protected Leader Routes */}
+        <Route element={<OnlyAdminPrivateRoute />}>
+          <Route path="/dashboard" element={<Sidebar />}>
+            <Route path="Addemployee" element={<Addemployee />} />
+            <Route path="admindashboard/:userId" element={<Admindashboard />} />
+            <Route path="companyemp" element={<CompanyEmp />} />
+            <Route path="Employee/:empId" element={<Employeeupdate />} />
+          </Route>
+        </Route>
      
      
       </Routes>
