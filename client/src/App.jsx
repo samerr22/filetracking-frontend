@@ -2,14 +2,21 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import Record from "./pages/table";
-import Ap from "./pages/appoiment";
 
-import Aupdate from "./pages/Aupdate";
+import Signin from "./pages/LearderSignin";
+import SignUp from "./pages/Company";
+import LearderRe from "./pages/LearderRegis";
+import Addemployee from "./pages/Addemployee";
 
+import SignInEmployee from "./pages/Employeesingin";
+import Homescreen from "./pages/Homepage";
+import OnlyAdminPrivateRoute from "./components/OnlyAdminPrivateRoute";
 
-import Homep from "./pages/homep";
-
+import Admindashboard from "./pages/admindashboard";
+import Sidebar from "./pages/adminsidebar";
+import CompanyEmp from "./pages/companyemployee";
+import Employeeupdate from "./pages/Employeeupdate";
+import Sale from "./pages/sale";
 
 
 
@@ -39,7 +46,7 @@ export default function App() {
           </Route>
         </Route>
      
-     
+      
       </Routes>
       <Footer />
     </BrowserRouter>

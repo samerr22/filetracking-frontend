@@ -111,7 +111,20 @@ export default function Sidbar() {
             <FaStickyNote /> All Employee
           </NavLink>
         </div>
+
+        
+      <div className="mt-6">
+  <a
+    href="https://drive.google.com/file/d/1RJcZg2yG7ZkWxlsfwnTp4V4t3TZy0NVx/view?usp=sharing"
+    className="flex items-center gap-2 bg-blue-600 px-4 py-2 rounded-lg text-white font-semibold hover:bg-blue-700 transition"
+    download
+  >
+    Download Desktop App
+  </a>
+</div>
+
       </aside>
+
 
       {/* Main Content */}
       <main className="flex-1 bg-gray-950 p-6 overflow-y-auto">

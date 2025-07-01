@@ -31,7 +31,7 @@ if (!mongoose.connection.readyState) {
 
 // Register routes
 app.use('/api/company', Company);
-app.use('/api/leader', Leader);
+app.use('/api/Leader', Leader);
 app.use('/api/employee', Employee);
 app.use('/api/activity', Activity);
 
