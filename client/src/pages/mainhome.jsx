@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import "@fontsource/playfair-display";
 import "@fontsource/open-sans";
 import Hero from "../img/hero.png";
+import Cube from "../img/cube.png";
 
 const leftToCenter = {
   hidden: { opacity: 0, x: -100 },
@@ -14,7 +15,7 @@ export default function HomePage() {
   return (
     <div className="bg-[#f7f7f7] text-[#2c2c2c] font-sans">
       {/* ⭐ HERO SECTION */}
-      <section className="bg-[#f7f7f7] py-12 px-4">
+      <section className="bg-[#f7f7f7]  px-4">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:justify-between gap-8">
           <div className="md:w-1/2 text-center md:text-left">
             <h1 className="text-3xl md:text-5xl font-playfair font-bold mb-6 leading-tight">
@@ -24,11 +25,11 @@ export default function HomePage() {
               Take the Quiz
             </button>
           </div>
-          <div className="md:w-1/2 flex justify-center md:justify-end">
+          <div className="">
             <img
               src={Hero}
               alt="Skincare"
-              className="rounded-lg shadow-lg w-full max-w-md object-cover"
+              className=""
             />
           </div>
         </div>
@@ -146,9 +147,9 @@ export default function HomePage() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <img
-              src="https://images.pexels.com/photos/97080/pexels-photo-97080.jpeg"
+              src={Cube}
               alt="About Seora"
-              className="rounded-xl shadow-lg w-full max-w-md object-cover"
+              className=""
             />
           </motion.div>
         </div>
@@ -346,59 +347,60 @@ export default function HomePage() {
 
    
 {/* ⭐ WHY CHOOSE US */}
+{/* ⭐ WHY CHOOSE US */}
 <section className="py-12 px-4 bg-[#f7f7f7]">
   <h1 className="text-center text-4xl sm:text-5xl font-playfair font-bold mb-12">
     Why Choose Us
   </h1>
 
-  <div className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-xl p-8 shadow-md">
-    <div className="space-y-6">
-      {[
-        {
-          title: "Experienced Team",
-          desc: "Our developers and designers bring years of expertise to every project.",
-          img: "https://cdn-icons-png.flaticon.com/512/2922/2922510.png"
-        },
-        {
-          title: "Client-Centric Approach",
-          desc: "We understand your goals and tailor solutions to meet them.",
-          img: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-        },
-        {
-          title: "Agile Development",
-          desc: "Quick iterations with transparent communication and delivery.",
-          img: "https://cdn-icons-png.flaticon.com/512/2721/2721299.png"
-        },
-        {
-          title: "Affordable Pricing",
-          desc: "High quality digital solutions at competitive rates.",
-          img: "https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
-        }
-      ].map((reason, idx) => (
-        <motion.div
-          key={idx}
-          className="border border-gray-200 p-4 rounded-lg shadow-sm flex items-center gap-6 hover:shadow-lg transition bg-[#f9f9f9]"
-          variants={leftToCenter}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <img
-            src={reason.img}
-            alt={reason.title}
-            className="w-12 h-12 object-contain"
-          />
-          <div>
-            <h3 className="text-lg font-playfair font-semibold mb-1">
-              {reason.title}
-            </h3>
-            <p className="text-gray-700 text-sm">{reason.desc}</p>
-          </div>
-        </motion.div>
-      ))}
-    </div>
+  <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+    {[
+      {
+        title: "Experienced Team",
+        desc: "Our developers and designers bring years of expertise to every project.",
+        img: "https://cdn-icons-png.flaticon.com/512/2922/2922510.png"
+      },
+      {
+        title: "Client-Centric Approach",
+        desc: "We understand your goals and tailor solutions to meet them.",
+        img: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+      },
+      {
+        title: "Agile Development",
+        desc: "Quick iterations with transparent communication and delivery.",
+        img: "https://cdn-icons-png.flaticon.com/512/2721/2721299.png"
+      },
+      {
+        title: "Affordable Pricing",
+        desc: "High quality digital solutions at competitive rates.",
+        img: "https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
+      }
+    ].map((reason, idx) => (
+      <motion.div
+        key={idx}
+        className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm flex items-center gap-6 hover:shadow-md transition"
+        variants={leftToCenter}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <img
+          src={reason.img}
+          alt={reason.title}
+          className="w-14 h-14 object-contain"
+        />
+        <div>
+          <h3 className="text-xl font-playfair font-semibold mb-1">
+            {reason.title}
+          </h3>
+          <p className="text-gray-700 text-sm">{reason.desc}</p>
+        </div>
+      </motion.div>
+    ))}
   </div>
 </section>
+
+
 
 
     
