@@ -17,6 +17,7 @@ import Sidebar from "./pages/adminsidebar";
 import CompanyEmp from "./pages/companyemployee";
 import Employeeupdate from "./pages/Employeeupdate";
 import Sale from "./pages/sale";
+import MainHome from "./pages/mainhome";
 
 
 
@@ -35,6 +36,7 @@ export default function App() {
         <Route path="/Leardersign-in" element={<Signin />} />
         <Route path="/employeesi" element={<SignInEmployee />} />
         <Route path="/sale" element={<Sale />} />
+         <Route path="/mainhome" element={<MainHome />} />
 
         {/* Protected Leader Routes */}
         <Route element={<OnlyAdminPrivateRoute />}>

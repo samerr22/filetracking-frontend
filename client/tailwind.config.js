@@ -6,7 +6,11 @@ export default {
     'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+       fontFamily: {
+        playfair: ['Playfair Display', 'serif'],
+      },
+    },
   },
   plugins: [require('flowbite/plugin'), 
   require('tailwind-scrollbar'),
