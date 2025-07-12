@@ -5,6 +5,7 @@ import "@fontsource/playfair-display";
 import "@fontsource/open-sans";
 import Hero from "../img/hero.png";
 import Cube from "../img/cube.png";
+import Settings from "../img/settings.png";
 
 const leftToCenter = {
   hidden: { opacity: 0, x: -100 },
@@ -15,25 +16,42 @@ export default function HomePage() {
   return (
     <div className="bg-[#f7f7f7] text-[#2c2c2c] font-sans">
       {/* ⭐ HERO SECTION */}
-      <section className="bg-[#f7f7f7]  px-4">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:justify-between gap-8">
-          <div className="md:w-1/2 text-center md:text-left">
-            <h1 className="text-3xl md:text-5xl font-playfair font-bold mb-6 leading-tight">
-              Formulate Your <br /> Personalized Skincare
-            </h1>
-            <button className="bg-gray-800 hover:bg-black transition text-white px-6 py-3 rounded-full">
-              Take the Quiz
-            </button>
-          </div>
-          <div className="">
-            <img
-              src={Hero}
-              alt="Skincare"
-              className=""
-            />
-          </div>
-        </div>
-      </section>
+     <section className="bg-[#f7f7f7] px-4">
+  <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:justify-between gap-8 relative">
+    
+    {/* 🖼️ Image section */}
+    <div className="w-full md:w-1/2 relative">
+      <img
+        src={Hero}
+        alt="Skincare"
+        className="w-full h-auto"
+      />
+
+      {/* 📝 Overlay content (visible only on mobile) */}
+      <div className="absolute inset-0 flex flex-col justify-center items-center md:hidden ">
+        <h1 className="text-3xl font-playfair font-bold mb-4 leading-tight text-center px-4 bg-white bg-opacity-20  rounded-lg inline-block">
+  Innovative AI Solutions <br /> & IoT Products for a Connected World
+</h1>
+
+        <button className="bg-gray-800 hover:bg-black transition text-white px-6 py-3 rounded-full">
+          Contact Us
+        </button>
+      </div>
+    </div>
+
+    {/* 📝 Text content (hidden on mobile, shown on desktop) */}
+    <div className="hidden md:block md:w-1/2 text-left">
+      <h1 className="text-3xl md:text-5xl font-playfair font-bold mb-6 leading-tight">
+         Innovative AI Solutions <br /> & IoT Products for a Connected World
+      </h1>
+      <button className="bg-gray-800 hover:bg-black transition text-white px-6 py-3 rounded-full">
+        Contact Us
+      </button>
+    </div>
+
+  </div>
+</section>
+
 
       <section className="text-center px-4 py-20 bg-[#f7f7f7] relative overflow-hidden">
         <motion.h1
@@ -69,15 +87,15 @@ export default function HomePage() {
               icon: "⚙️"
             },
             {
-              title: "Hosting Service",
-              desc: "Reliable and secure hosting services that ensure your websites and applications are always available.",
-              icon: "🗄️"
-            },
-            {
-              title: "Digital Marketing",
-              desc: "We offer digital marketing services to help you grow your brand and reach your target audience effectively.",
-              icon: "📈"
-            }
+    title: "AI Solutions",
+    desc: "Innovative artificial intelligence solutions to automate processes and enhance decision-making.",
+    icon: "🤖"
+  },
+  {
+    title: "IoT Product Manufacturing",
+    desc: "Designing and manufacturing IoT products to build a connected and smarter world.",
+    icon: "🌐"
+  }
           ].map((service, idx) => (
             <motion.div
               key={idx}
@@ -108,7 +126,7 @@ export default function HomePage() {
 
       {/*about us */}
 
-      <section className="py-20 px-6 sm:px-10 bg-[#f7f7f7] relative overflow-hidden">
+      <section className="py-10 px-6 sm:px-10 bg-[#f7f7f7] relative overflow-hidden">
         {/* Optional decorative gradient blob */}
         <div className="absolute top-0 left-0 w-72 h-72 bg-blue-100 rounded-full opacity-30 blur-3xl z-0"></div>
 
@@ -124,13 +142,16 @@ export default function HomePage() {
             <h1 className="text-3xl sm:text-5xl font-playfair font-bold mb-6 text-gray-900">
               About Us
             </h1>
-            <p className="text-gray-700 text-lg leading-relaxed mb-8">
-              At <span className="font-semibold text-blue-600">Seora</span>,
-              we’re a future-focused software development company dedicated to
-              crafting high-quality digital solutions. From custom software to
-              web & mobile apps, our mission is to help businesses grow through
-              innovative technology.
-            </p>
+           <p className="text-gray-700 text-lg leading-relaxed mb-8">
+  At <span className="font-semibold text-blue-600">Seora</span>, we deliver innovative digital solutions that empower businesses to thrive in today’s connected world. Our expertise spans <span className="font-semibold">mobile app development</span>, crafting user-friendly apps for Android and iOS that engage and retain customers. We build <span className="font-semibold">web applications</span> tailored to your unique needs—scalable, secure, and efficient—helping you streamline operations and expand your reach.
+  <br /><br />
+  Our <span className="font-semibold">website development</span> services create responsive, visually stunning sites that strengthen your brand presence. We also develop <span className="font-semibold">custom software</span> designed to optimize workflows and boost productivity. Leading the way in technology, we offer <span className="font-semibold">AI solutions</span> that automate processes and provide actionable insights for smarter decision-making.
+  <br /><br />
+  Additionally, our <span className="font-semibold">IoT product manufacturing</span> connects devices and systems, enabling smarter environments and improved efficiency. At Seora, we’re not just service providers — we’re your technology partner dedicated to turning ideas into powerful, future-ready solutions.
+</p>
+
+  
+
             <Link to="/about">
               <button className="inline-block bg-gray-800 hover:bg-black text-white px-8 py-4 rounded-full shadow-md transition">
                 Learn More
@@ -152,7 +173,7 @@ export default function HomePage() {
               className=""
             />
           </motion.div>
-        </div>
+        </div>tfpdI
       </section>
 
       {/* ⭐ VALUES & EXPERTISE */}
@@ -275,7 +296,106 @@ export default function HomePage() {
       </section> */}
      
 
-      {/* ⭐ TESTIMONIALS */}
+   
+
+
+      {/* ⭐ TECHNOLOGIES  <section className="py-12 px-4 bg-[#f7f7f7]">
+        <h1 className="text-center text-4xl sm:text-5xl font-playfair font-bold mb-12">
+          Technologies We Use
+        </h1>
+        <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-6">
+          {["React", "Node.js", "MongoDB", "Flutter", "AWS", "Firebase"].map(
+            (tech, idx) => (
+              <motion.div
+                key={idx}
+                className="bg-white border border-gray-200 px-6 py-3 rounded-full shadow-sm text-sm font-semibold"
+                variants={leftToCenter}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                {tech}
+              </motion.div>
+            )
+          )}
+        </div>
+      </section> */}
+     
+
+
+   
+{/* ⭐ WHY CHOOSE US */}
+<section className="py-12 px-4 bg-[#f7f7f7]">
+  <h1 className="text-center text-4xl sm:text-5xl font-playfair font-bold mb-12">
+    Why Choose Us
+  </h1>
+
+  <div className="flex flex-col lg:flex-row justify-center items-center lg:gap-44 gap-10">
+    {/* ⭐ Reasons grid */}
+    <div className="flex flex-col gap-6">
+      {[
+        {
+          title: "Experienced Team",
+          desc: "Our developers and designers bring years of expertise to every project.",
+          img: "https://cdn-icons-png.flaticon.com/512/2922/2922510.png"
+        },
+        {
+          title: "Client-Centric Approach",
+          desc: "We understand your goals and tailor solutions to meet them.",
+          img: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+        },
+        {
+          title: "Agile Development",
+          desc: "Quick iterations with transparent communication and delivery.",
+          img: "https://cdn-icons-png.flaticon.com/512/2721/2721299.png"
+        },
+        {
+          title: "Affordable Pricing",
+          desc: "High quality digital solutions at competitive rates.",
+          img: "https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
+        }
+      ].map((reason, idx) => (
+        <motion.div
+          key={idx}
+          className="bg-none border-none p-6 rounded-lg flex items-center gap-6 hover:shadow-md transition"
+          variants={leftToCenter}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <img
+            src={reason.img}
+            alt={reason.title}
+            className="w-14 h-14 object-contain"
+          />
+          <div>
+            <h3 className="text-xl font-playfair font-semibold mb-1">
+              {reason.title}
+            </h3>
+            <p className="text-gray-700 text-sm">{reason.desc}</p>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+
+    {/* ⭐ Big horizontal image */}
+    <motion.div
+      className="flex justify-center"
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      <img
+        src={Settings} // replace with your own image URL
+        alt="Why Choose Us"
+        className="w-[250px] sm:w-[300px] md:w-[350px] lg:w-[400px]"
+      />
+    </motion.div>
+  </div>
+</section>
+
+   {/* ⭐ TESTIMONIALS */}
    
 <section className="py-12 px-4 bg-[#f7f7f7]">
   <h1 className="text-center text-4xl sm:text-5xl font-playfair font-bold mb-12">
@@ -320,85 +440,6 @@ export default function HomePage() {
   </div>
 </section>
 
-
-      {/* ⭐ TECHNOLOGIES  <section className="py-12 px-4 bg-[#f7f7f7]">
-        <h1 className="text-center text-4xl sm:text-5xl font-playfair font-bold mb-12">
-          Technologies We Use
-        </h1>
-        <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-6">
-          {["React", "Node.js", "MongoDB", "Flutter", "AWS", "Firebase"].map(
-            (tech, idx) => (
-              <motion.div
-                key={idx}
-                className="bg-white border border-gray-200 px-6 py-3 rounded-full shadow-sm text-sm font-semibold"
-                variants={leftToCenter}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-              >
-                {tech}
-              </motion.div>
-            )
-          )}
-        </div>
-      </section> */}
-     
-
-
-   
-{/* ⭐ WHY CHOOSE US */}
-{/* ⭐ WHY CHOOSE US */}
-<section className="py-12 px-4 bg-[#f7f7f7]">
-  <h1 className="text-center text-4xl sm:text-5xl font-playfair font-bold mb-12">
-    Why Choose Us
-  </h1>
-
-  <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-    {[
-      {
-        title: "Experienced Team",
-        desc: "Our developers and designers bring years of expertise to every project.",
-        img: "https://cdn-icons-png.flaticon.com/512/2922/2922510.png"
-      },
-      {
-        title: "Client-Centric Approach",
-        desc: "We understand your goals and tailor solutions to meet them.",
-        img: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-      },
-      {
-        title: "Agile Development",
-        desc: "Quick iterations with transparent communication and delivery.",
-        img: "https://cdn-icons-png.flaticon.com/512/2721/2721299.png"
-      },
-      {
-        title: "Affordable Pricing",
-        desc: "High quality digital solutions at competitive rates.",
-        img: "https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
-      }
-    ].map((reason, idx) => (
-      <motion.div
-        key={idx}
-        className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm flex items-center gap-6 hover:shadow-md transition"
-        variants={leftToCenter}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        <img
-          src={reason.img}
-          alt={reason.title}
-          className="w-14 h-14 object-contain"
-        />
-        <div>
-          <h3 className="text-xl font-playfair font-semibold mb-1">
-            {reason.title}
-          </h3>
-          <p className="text-gray-700 text-sm">{reason.desc}</p>
-        </div>
-      </motion.div>
-    ))}
-  </div>
-</section>
 
 
 
