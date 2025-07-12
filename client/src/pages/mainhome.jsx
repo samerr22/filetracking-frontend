@@ -173,7 +173,7 @@ export default function HomePage() {
               className=""
             />
           </motion.div>
-        </div>tfpdI
+        </div>
       </section>
 
       {/* ⭐ VALUES & EXPERTISE */}
@@ -398,9 +398,15 @@ export default function HomePage() {
    {/* ⭐ TESTIMONIALS */}
    
 <section className="py-12 px-4 bg-[#f7f7f7]">
-  <h1 className="text-center text-4xl sm:text-5xl font-playfair font-bold mb-12">
+  <motion.h1
+          className="text-center text-4xl sm:text-5xl font-playfair font-bold mb-12"
+          initial={{ opacity: 0, y: -50, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.3 }}
+        > 
     What Our Clients Say
-  </h1>
+  </motion.h1>
   <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {[
       {
