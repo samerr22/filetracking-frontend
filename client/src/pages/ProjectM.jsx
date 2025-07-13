@@ -1,11 +1,8 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "@fontsource/playfair-display";
 import "@fontsource/open-sans";
 import Hero from "../img/dashboard.png";
-import Cube from "../img/cube.png";
-import Settings from "../img/settings.png";
 
 const leftToCenter = {
   hidden: { opacity: 0, x: -100 },
