@@ -19,6 +19,11 @@ import Employeeupdate from "./pages/Employeeupdate";
 import Sale from "./pages/sale";
 import MainHome from "./pages/mainhome";
 
+import ProjectM from "./pages/ProjectM";
+import Pricing from "./pages/Pricing";
+
+import UserPack from "./Package/userPack";
+
 
 
 
@@ -37,6 +42,11 @@ export default function App() {
         <Route path="/employeesi" element={<SignInEmployee />} />
         <Route path="/sale" element={<Sale />} />
          <Route path="/mainhome" element={<MainHome />} />
+           <Route path="/projectm" element={<ProjectM />} />
+           <Route path="/Pricing" element={<Pricing />} />
+
+
+           <Route path="/UserPack" element={<UserPack />} />
 
         {/* Protected Leader Routes */}
         <Route element={<OnlyAdminPrivateRoute />}>
