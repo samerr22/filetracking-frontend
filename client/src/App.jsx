@@ -46,7 +46,7 @@ export default function App() {
            <Route path="/Pricing" element={<Pricing />} />
 
 
-           <Route path="/UserPack" element={<UserPack />} />
+           <Route path="/Template" element={<UserPack />} />
 
         {/* Protected Leader Routes */}
         <Route element={<OnlyAdminPrivateRoute />}>

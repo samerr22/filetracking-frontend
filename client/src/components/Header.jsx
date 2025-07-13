@@ -11,11 +11,15 @@ export default function Header() {
       <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
         <div className="flex items-center space-x-2">
           <img src="/logo.png" alt="Logo" className="h-8" />
-          <span className="text-xl font-bold text-blue-800 font-playfair">Seora</span>
+          <span className="text-xl font-bold text-blue-800 font-playfair">
+            Seora
+          </span>
         </div>
 
         <div className="hidden md:flex space-x-6 items-center">
-          <Link to="#" className="text-gray-700 hover:text-blue-600">Home</Link>
+          <Link to="/mainhome" className="text-gray-700 hover:text-blue-600">
+            Home
+          </Link>
 
           {/* Product with dropdown */}
           <div className="relative">
@@ -27,14 +31,37 @@ export default function Header() {
             </button>
             {productOpen && (
               <div className="absolute top-full left-0 mt-2 bg-white border rounded shadow-md w-40 z-50">
-                <Link to="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Tool</Link>
-                <Link to="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Template</Link>
+                <Link
+                  to="/projectm"
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setProductOpen(false);
+                  }}
+                >
+                  Tool
+                </Link>
+
+                <Link
+                  to="/Template"
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setProductOpen(false);
+                  }}
+                >
+                  Template
+                </Link>
               </div>
             )}
           </div>
 
-          <Link to="#" className="text-gray-700 hover:text-blue-600">About Us</Link>
-          <Link to="#" className="text-gray-700 hover:text-blue-600">Contact Us</Link>
+          <Link to="#" className="text-gray-700 hover:text-blue-600">
+            About Us
+          </Link>
+          <Link to="#" className="text-gray-700 hover:text-blue-600">
+            Contact Us
+          </Link>
         </div>
 
         {/* Hamburger Menu for Mobile */}
@@ -48,7 +75,9 @@ export default function Header() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-white px-4 pb-4 space-y-2">
-          <Link to="#" className="block text-gray-700 hover:text-blue-600">Home</Link>
+          <Link to="#" className="block text-gray-700 hover:text-blue-600">
+            Home
+          </Link>
 
           {/* Product with dropdown in mobile */}
           <div>
@@ -60,14 +89,28 @@ export default function Header() {
             </button>
             {productOpen && (
               <div className="pl-4">
-                <Link to="#" className="block text-gray-700 hover:text-blue-600">Tool</Link>
-                <Link to="#" className="block text-gray-700 hover:text-blue-600">Template</Link>
+                <Link
+                  to="/projectm"
+                  className="block text-gray-700 hover:text-blue-600"
+                >
+                  Tool
+                </Link>
+                <Link
+                  to="/Template"
+                  className="block text-gray-700 hover:text-blue-600"
+                >
+                  Template
+                </Link>
               </div>
             )}
           </div>
 
-          <Link to="#" className="block text-gray-700 hover:text-blue-600">About Us</Link>
-          <Link to="#" className="block text-gray-700 hover:text-blue-600">Contact Us</Link>
+          <Link to="#" className="block text-gray-700 hover:text-blue-600">
+            About Us
+          </Link>
+          <Link to="#" className="block text-gray-700 hover:text-blue-600">
+            Contact Us
+          </Link>
         </div>
       )}
     </header>
