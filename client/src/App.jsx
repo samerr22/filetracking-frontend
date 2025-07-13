@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-
 import Signin from "./pages/LearderSignin";
 import SignUp from "./pages/Company";
 import LearderRe from "./pages/LearderRegis";
@@ -23,30 +22,25 @@ import ProjectM from "./pages/ProjectM";
 import Pricing from "./pages/Pricing";
 
 import UserPack from "./Package/userPack";
-
-
-
+import AddPack from "./Package/AddPack";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-
-       
-
-       <Route path="/" element={<Homescreen />} />
+        <Route path="/" element={<Homescreen />} />
         <Route path="/compnayregister" element={<SignUp />} />
         <Route path="/LearderRe" element={<LearderRe />} />
         <Route path="/Leardersign-in" element={<Signin />} />
         <Route path="/employeesi" element={<SignInEmployee />} />
         <Route path="/sale" element={<Sale />} />
-         <Route path="/mainhome" element={<MainHome />} />
-           <Route path="/projectm" element={<ProjectM />} />
-           <Route path="/Pricing" element={<Pricing />} />
+        <Route path="/mainhome" element={<MainHome />} />
+        <Route path="/projectm" element={<ProjectM />} />
+        <Route path="/Pricing" element={<Pricing />} />
 
-
-           <Route path="/Template" element={<UserPack />} />
+        <Route path="/Template" element={<UserPack />} />
+        <Route path="/AddPack" element={<AddPack />} />
 
         {/* Protected Leader Routes */}
         <Route element={<OnlyAdminPrivateRoute />}>
@@ -57,8 +51,6 @@ export default function App() {
             <Route path="Employee/:empId" element={<Employeeupdate />} />
           </Route>
         </Route>
-     
-      
       </Routes>
       <Footer />
     </BrowserRouter>

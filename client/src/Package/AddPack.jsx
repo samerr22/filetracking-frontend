@@ -1,219 +1,134 @@
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
-import { app } from "../firebase";
-import { useState } from "react";
-import { CircularProgressbar } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 
-export default function AddThings() {
-  const [files, setFiles] = useState(Array(10).fill(null)); // Array to hold 10 files
-  const [imageUploadProgress, setImageUploadProgress] = useState([]);
-  const [imageUploadErrors, setImageUploadErrors] = useState([]);
-  const [formData, setFormData] = useState({ images: [] });
-  const [publishError, setPublishError] = useState(null);
-  
-  console.log(formData)
+export default function AddPost() {
+  const [title, setTitle] = useState("");
+  const [images, setImages] = useState([""]); // start with one input field
+  const [Des, setDes] = useState("");
+  const [youtubeLink, setYoutubeLink] = useState("");
+  const [gitLink, setGitLink] = useState("");
+  const [message, setMessage] = useState("");
 
-  const navigate = useNavigate();
+  const handleImageChange = (index, value) => {
+    const newImages = [...images];
+    newImages[index] = value;
+    setImages(newImages);
+  };
 
-  const handleFileChange = async (index, file) => {
-    if (!file) return;
-
-    const updatedFiles = [...files];
-    updatedFiles[index] = file;
-    setFiles(updatedFiles);
-    setImageUploadErrors([]);
-
-    try {
-      const storage = getStorage(app);
-      const fileName = new Date().getTime() + "-" + file.name;
-      const storageRef = ref(storage, fileName);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          const newProgress = [...imageUploadProgress];
-          newProgress[index] = progress.toFixed(0);
-          setImageUploadProgress(newProgress);
-        },
-        (error) => {
-          const newErrors = [...imageUploadErrors];
-          newErrors[index] = "Image upload failed";
-          setImageUploadErrors(newErrors);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setFormData((prev) => ({
-              ...prev,
-              images: [...(prev.images || []), downloadURL],
-            }));
-            const newProgress = [...imageUploadProgress];
-            newProgress[index] = null; // Reset progress after upload
-            setImageUploadProgress(newProgress);
-          });
-        }
-      );
-    } catch (error) {
-      const newErrors = [...imageUploadErrors];
-      newErrors[index] = "Image upload failed";
-      setImageUploadErrors(newErrors);
-      console.error(error);
-    }
+  const addImageField = () => {
+    setImages([...images, ""]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!title || images.length === 0 || images.some((img) => img.trim() === "")) {
+      setMessage("Title and at least one valid image URL are required.");
+      return;
+    }
+
     try {
-      const res = await fetch("/api/items/pcreate", {
+      const res = await fetch("http://localhost:5000/api/items/addPost", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-       
-      }
-      
-    );
-    
-      const data = await res.json();
-      if (!res.ok) {
-        setPublishError(data.message);
-        console.log(data.message)
-        return;
-       
-      }
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, images, Des, youtubeLink, gitLink }),
+      });
 
-      setPublishError(null);
-      alert("Successfull");
-
-      navigate("");
-    } catch (error) {
-      setPublishError("Something went wrong");
-      console.log(error)
+      if (res.ok) {
+        setMessage("✅ Post created successfully!");
+        // reset form
+        setTitle("");
+        setImages([""]);
+        setDes("");
+        setYoutubeLink("");
+        setGitLink("");
+      } else {
+        const errorText = await res.text();
+        setMessage(`❌ Failed: ${errorText}`);
+      }
+    } catch (err) {
+      console.error(err);
+      setMessage("❌ Server error. Try again later.");
     }
   };
 
- 
-
- 
-
-  const isLeapYear = (year) => {
-    return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
-  };
-
   return (
-    <div className="min-h-screen relative flex items-center justify-center px-4 sm:px-6 lg:px-8">
-    <div className="relative mt-20 mb-28 w-full max-w-2xl p-6 md:p-8 flex flex-col items-center">
-      <div className="flex justify-center items-center mb-4">
-        <Link to={`/PackageM`}>
-          <button className="text-md hover:text-blue-400 font-serif underline text-gray-800">
-            Back
-          </button>
-        </Link>
-      </div>
-      <div className="my-7 flex items-center justify-center">
-        <h1 className="text-3xl font-serif uppercase text-slate-700">
-          New Post
-        </h1>
-      </div>
-      <div className="my-7 flex items-center justify-center">
-        <h1 className="text-sm font-serif uppercase text-red-600">
-          Image Size: 2MB
-        </h1>
-      </div>
+    <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md mt-10">
+      <h1 className="text-3xl font-playfair font-bold mb-6 text-center text-blue-600">Add New Post</h1>
 
-      <div className="w-full">
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          {/* Clickable Rectangles for File Uploads */}
-          <div className="flex flex-wrap gap-4 mb-4 justify-center">
-            {Array.from({ length: 10 }, (_, index) => (
-              <div
-                key={index}
-                className="relative w-32 h-20 bg-white border border-gray-300 rounded-md flex items-center justify-center cursor-pointer"
-                onClick={() => document.getElementById(`file-input-${index}`).click()}
-              >
-                <input
-                  type="file"
-                  id={`file-input-${index}`}
-                  accept="image/*"
-                  onChange={(e) => handleFileChange(index, e.target.files[0])}
-                  className="hidden"
-                />
-                {imageUploadProgress[index] !== null && (
-                  <div className="absolute w-[32px] h-[32px] top-0 left-0 flex items-center justify-center">
-                    <CircularProgressbar
-                      value={imageUploadProgress[index]}
-                      text={`${imageUploadProgress[index] || 0}%`}
-                    />
-                  </div>
-                )}
-                {imageUploadErrors[index] && (
-                  <p className="absolute text-red-600 bottom-1">{imageUploadErrors[index]}</p>
-                )}
-                {/* Display a white rectangle for uploaded images */}
-                {formData.images[index] ? (
-                  <div className="absolute w-full h-full top-0 left-0 bg-white flex items-center justify-center rounded-md">
-                    <img 
-                      src={formData.images[index]} 
-                      alt={`Uploaded-${index}`} 
-                      className="object-cover w-full h-full rounded-md" 
-                    />
-                  </div>
-                ) : (
-                  <span className="text-gray-500">Click to upload</span>
-                )}
-              </div>
-            ))}
-          </div>
+      {message && (
+        <p className="mb-4 text-center text-sm font-medium text-red-600">{message}</p>
+      )}
 
-          <div className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="block text-gray-700 font-semibold mb-1">Title</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 font-semibold mb-1">Description</label>
+          <textarea
+            value={Des}
+            onChange={(e) => setDes(e.target.value)}
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 font-semibold mb-1">Image URLs</label>
+          {images.map((img, index) => (
             <input
-              className="bg-slate-100 shadow-sm shadow-slate-500 p-3 rounded-lg w-full h-11"
+              key={index}
               type="text"
-              placeholder="Title"
+              value={img}
+              onChange={(e) => handleImageChange(index, e.target.value)}
+              placeholder={`Image URL ${index + 1}`}
+              className="w-full mb-2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
-              id="name"
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
             />
+          ))}
+          <button
+            type="button"
+            onClick={addImageField}
+            className="text-blue-600 hover:underline text-sm"
+          >
+            + Add another image
+          </button>
+        </div>
 
-            
-          
+        <div>
+          <label className="block text-gray-700 font-semibold mb-1">YouTube Link</label>
+          <input
+            type="text"
+            value={youtubeLink}
+            onChange={(e) => setYoutubeLink(e.target.value)}
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
 
-            <textarea
-              className="bg-slate-100 shadow-sm shadow-slate-500 p-3 rounded-lg w-full h-32"
-              placeholder="More Information"
-              required
-              id="desc"
-              onChange={(e) =>
-                setFormData({ ...formData, desc: e.target.value })
-              }
-            />
+        <div>
+          <label className="block text-gray-700 font-semibold mb-1">GitHub Link</label>
+          <input
+            type="text"
+            value={gitLink}
+            onChange={(e) => setGitLink(e.target.value)}
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
 
-            <button
-              type="submit"
-              className="bg-[#2471d6] p-3 font-medium text-white hover:text-black uppercase rounded-lg w-full h-11"
-            >
-              Submit
-            </button>
-          </div>
-
-          {publishError && (
-            <p className="mt-5 text-red-600 bg-white w-300 h-7 rounded-lg text-center">
-              {publishError}
-            </p>
-          )}
-        </form>
-      </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition"
+        >
+          Add Post
+        </button>
+      </form>
     </div>
-  </div>
   );
 }
