@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 
-export default function SignUp() {
+export default function AboutUs() {
   const [formData, setFormData] = useState({});
   console.log(formData)
   const [errorMessage, setErrorMessage] = useState(null);

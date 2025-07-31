@@ -26,6 +26,8 @@ import AddPack from "./Package/AddPack";
 
 import GLBViewer from "./pages/GLBViewer";
 
+import Sub from "./pages/submit";
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -33,8 +35,9 @@ export default function App() {
       <Routes>
 
   <Route path="/scen" element={<GLBViewer />} />
+   <Route path="/s" element={<Sub/>} />
 
-        <Route path="/" element={<Homescreen />} />
+        
         <Route path="/compnayregister" element={<SignUp />} />
         <Route path="/LearderRe" element={<LearderRe />} />
         <Route path="/Leardersign-in" element={<Signin />} />
