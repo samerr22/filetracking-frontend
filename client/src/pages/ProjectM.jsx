@@ -154,9 +154,9 @@ export default function ProjectM() {
               approvals Work-life balance metrics
             </p>
 
-            <Link to="/about">
+            <Link to="/Pricing">
               <button className="inline-block bg-gray-800 hover:bg-black text-white px-8 py-4 rounded-full shadow-md transition">
-                Get a Demo
+                Get a Demoo
               </button>
             </Link>
           </motion.div>

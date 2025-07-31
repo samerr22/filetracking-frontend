@@ -24,11 +24,16 @@ import Pricing from "./pages/Pricing";
 import UserPack from "./Package/userPack";
 import AddPack from "./Package/AddPack";
 
+import GLBViewer from "./pages/GLBViewer";
+
 export default function App() {
   return (
     <BrowserRouter>
       <Header />
       <Routes>
+
+  <Route path="/scen" element={<GLBViewer />} />
+
         <Route path="/" element={<Homescreen />} />
         <Route path="/compnayregister" element={<SignUp />} />
         <Route path="/LearderRe" element={<LearderRe />} />
