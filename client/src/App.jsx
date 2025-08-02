@@ -28,6 +28,8 @@ import GLBViewer from "./pages/GLBViewer";
 
 import Sub from "./pages/submit";
 
+import HelmetLandingPage from "./pages/HelmetLandingPage";
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -36,6 +38,9 @@ export default function App() {
 
   <Route path="/scen" element={<GLBViewer />} />
    <Route path="/s" element={<Sub/>} />
+
+
+    <Route path="/HelmetLandingPage" element={< HelmetLandingPage/>} />
 
         
         <Route path="/compnayregister" element={<SignUp />} />
