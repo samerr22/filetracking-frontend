@@ -1,8 +1,8 @@
 import React, { Suspense, useEffect, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
 import { Box3, Vector3 } from "three";
-import * as THREE from "three"; // Required for animation loop constants
+import * as THREE from "three";
 
 // Preload model
 useGLTF.preload("/models/myAnimation.glb");
@@ -13,8 +13,6 @@ function Model() {
   const modelRef = useRef();
 
   useEffect(() => {
-    console.log("GLTF loaded:", gltf);
-
     // Center the model
     const box = new Box3().setFromObject(gltf.scene);
     const size = new Vector3();
@@ -33,31 +31,21 @@ function Model() {
       }
     });
 
-    // Play the first animation only once
+    // Play first animation once
     const firstAction = Object.values(actions)[0];
     if (firstAction) {
-      console.log("Playing animation:", firstAction.getClip().name);
       firstAction.reset();
       firstAction.setLoop(THREE.LoopOnce, 1);
-      firstAction.clampWhenFinished = true; // Freeze on last frame
+      firstAction.clampWhenFinished = true;
       firstAction.play();
-    } else {
-      console.log("No animations found.");
     }
   }, [gltf, actions]);
-
-  // Optional: Add gentle rotation (remove if not needed)
-  useFrame(() => {
-    if (modelRef.current) {
-      modelRef.current.rotation.y += 0.005;
-    }
-  });
 
   return (
     <primitive
       ref={modelRef}
       object={gltf.scene}
-      scale={0.5} // Adjust as needed
+      scale={0.5}
     />
   );
 }
@@ -65,16 +53,51 @@ function Model() {
 export default function GLBViewer() {
   return (
     <div style={{ width: "100%", height: "500px" }}>
-      <Suspense fallback={<div style={{ color: "#fff" }}>Loading model...</div>}>
+      <Suspense
+        fallback={
+          <div
+            style={{
+              width: "100%",
+              height: "500px",
+              backgroundColor: "black",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                border: "6px solid #444",
+                borderTop: "6px solid #0ff",
+                borderRadius: "50%",
+                width: "50px",
+                height: "50px",
+                animation: "spin 1s linear infinite",
+              }}
+            />
+            <style>{`
+              @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+              }
+            `}</style>
+          </div>
+        }
+      >
         <Canvas
           shadows
           camera={{ position: [0, 2, 10], fov: 45 }}
-          style={{ background: "#222" }}
+          gl={{ alpha: true }}
+          style={{ background: "transparent" }}
         >
           <ambientLight intensity={0.9} />
           <directionalLight position={[5, 5, 5]} intensity={1.2} castShadow />
           <Model />
-          <OrbitControls />
+          <OrbitControls
+            enableRotate={false}
+            enableZoom={false}
+            enablePan={false}
+          />
         </Canvas>
       </Suspense>
     </div>
